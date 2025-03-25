@@ -1,5 +1,6 @@
 import Link from "next/link";
 import Image from "next/image";
+import AdvancedButton from "./AdvancedButton";
 
 export default function Header() {
   return (
@@ -31,12 +32,9 @@ export default function Header() {
             <Link href="/contact" className="text-gray-300 hover:text-white transition duration-300 font-medium">
               Contact
             </Link>
-            <Link 
-              href="/get-started" 
-              className="bg-blue-600 hover:bg-blue-700 text-white px-5 py-2.5 rounded-md transition duration-300 font-medium"
-            >
+            <AdvancedButton href="/get-started" variant="primary" size="sm">
               Get Started
-            </Link>
+            </AdvancedButton>
           </nav>
           
           <button className="md:hidden text-white p-2 rounded-md hover:bg-blue-900/20">
