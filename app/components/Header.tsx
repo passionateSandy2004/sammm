@@ -1,8 +1,20 @@
+"use client"
+
 import Link from "next/link";
 import Image from "next/image";
 import AdvancedButton from "./AdvancedButton";
+import { usePathname } from "next/navigation";
 
 export default function Header() {
+  const pathname = usePathname();
+  
+  const navItems = [
+    { label: "Home", href: "/" },
+    { label: "About", href: "/about" },
+    { label: "Services", href: "/services" },
+    { label: "Contact", href: "/contact" },
+  ];
+  
   return (
     <header className="absolute top-0 left-0 right-0 z-50 py-5">
       <div className="container mx-auto px-6">
@@ -20,19 +32,27 @@ export default function Header() {
           </Link>
           
           <nav className="hidden md:flex items-center space-x-8">
-            <Link href="/" className="text-gray-300 hover:text-white transition duration-300 font-medium">
-              Home
-            </Link>
-            <Link href="/about" className="text-white font-medium border-b-2 border-blue-500 pb-1 transition duration-300">
-              About
-            </Link>
-            <Link href="/services" className="text-gray-300 hover:text-white transition duration-300 font-medium">
-              Services
-            </Link>
-            <Link href="/contact" className="text-gray-300 hover:text-white transition duration-300 font-medium">
-              Contact
-            </Link>
-            <AdvancedButton href="/get-started" variant="primary" size="sm">
+            {navItems.map((item) => {
+              const isActive = 
+                item.href === "/" 
+                  ? pathname === "/" 
+                  : pathname.startsWith(item.href);
+                  
+              return (
+                <Link 
+                  key={item.href}
+                  href={item.href} 
+                  className={`transition duration-300 font-medium ${
+                    isActive 
+                      ? "text-white border-b-2 border-blue-500 pb-1" 
+                      : "text-gray-300 hover:text-white"
+                  }`}
+                >
+                  {item.label}
+                </Link>
+              );
+            })}
+            <AdvancedButton href="/contact" variant="primary" size="sm">
               Get Started
             </AdvancedButton>
           </nav>
